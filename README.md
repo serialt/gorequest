@@ -25,7 +25,7 @@ Sending request has never been as fun nor easier than this. It comes with lots o
 ## Installation
 
 ```bash
-$ go get github.com/parnurzeal/gorequest
+$ go get github.com/serialt/gorequest
 ```
 
 ## Documentation
@@ -303,34 +303,34 @@ If you find any improvement or issue you want to fix, feel free to send me a pul
 Thanks to all contributors thus far:
 
 
-|   Contributors                        |
-|---------------------------------------|
-| https://github.com/alaingilbert       |
-| https://github.com/austinov           |
-| https://github.com/coderhaoxin        |
-| https://github.com/codegoalie         |
-| https://github.com/dafang             |
-| https://github.com/davyzhang          |
-| https://github.com/dickeyxxx          |
-| https://github.com/figlief            |
-| https://github.com/fraenky8           |
-| https://github.com/franciscocpg       |
-| https://github.com/heytitle           |
-| https://github.com/hownowstephen      |
-| https://github.com/kemadz             |
-| https://github.com/killix             |
-| https://github.com/jaytaylor          |
-| https://github.com/na-ga              |
-| https://github.com/piotrmiskiewicz    |
-| https://github.com/pencil001          |
-| https://github.com/pkopac             |
-| https://github.com/quangbuule         |
-| https://github.com/QuentinPerez       |
-| https://github.com/smallnest          |
-| https://github.com/WaveCutz           |
-| https://github.com/xild               |
-| https://github.com/yangmls            |
-| https://github.com/6david9            |
+| Contributors                       |
+| ---------------------------------- |
+| https://github.com/alaingilbert    |
+| https://github.com/austinov        |
+| https://github.com/coderhaoxin     |
+| https://github.com/codegoalie      |
+| https://github.com/dafang          |
+| https://github.com/davyzhang       |
+| https://github.com/dickeyxxx       |
+| https://github.com/figlief         |
+| https://github.com/fraenky8        |
+| https://github.com/franciscocpg    |
+| https://github.com/heytitle        |
+| https://github.com/hownowstephen   |
+| https://github.com/kemadz          |
+| https://github.com/killix          |
+| https://github.com/jaytaylor       |
+| https://github.com/na-ga           |
+| https://github.com/piotrmiskiewicz |
+| https://github.com/pencil001       |
+| https://github.com/pkopac          |
+| https://github.com/quangbuule      |
+| https://github.com/QuentinPerez    |
+| https://github.com/smallnest       |
+| https://github.com/WaveCutz        |
+| https://github.com/xild            |
+| https://github.com/yangmls         |
+| https://github.com/6david9         |
 
 
 Also, co-maintainer is needed here. If anyone is interested, please email me (parnurzeal at gmail.com)
