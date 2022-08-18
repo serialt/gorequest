@@ -1,4 +1,4 @@
-module github.com/serialt/req
+module github.com/serialt/gorequest
 
 go 1.19
 
