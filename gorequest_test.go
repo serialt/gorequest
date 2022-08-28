@@ -2569,19 +2569,19 @@ func TestSetDebugByEnvironmentVar(t *testing.T) {
 	var buf bytes.Buffer
 	logger := log.New(&buf, "[gorequest]", log.LstdFlags)
 
-	os.Setenv("GOREQUEST_DEBUG", "1")
+	os.Setenv("REQ_DEBUG", "1")
 	New().SetLogger(logger).Get(endpoint).End()
 
 	if len(buf.String()) == 0 {
-		t.Fatalf("\nExpected gorequest to log request and response object if GOREQUEST_DEBUG=1")
+		t.Fatalf("\nExpected REQ to log request and response object if REQ_DEBUG=1")
 	}
 
-	os.Setenv("GOREQUEST_DEBUG", "")
+	os.Setenv("REQ_DEBUG", "")
 	buf.Reset()
 
 	New().SetLogger(logger).Get(endpoint).End()
 
 	if len(buf.String()) > 0 {
-		t.Fatalf("\nExpected gorequest not to log request and response object if GOREQUEST_DEBUG is not set.")
+		t.Fatalf("\nExpected gorequest not to log request and response object if REQ_DEBUG is not set.")
 	}
 }

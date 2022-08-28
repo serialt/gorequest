@@ -1,4 +1,4 @@
-package gorequest
+package req
 
 type Logger interface {
 	SetPrefix(string)

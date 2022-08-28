@@ -1,9 +1,9 @@
-GoRequest
+Req
 =========
 
-GoRequest -- Simplified HTTP client ( inspired by famous SuperAgent lib in Node.js )
+Req -- Simplified HTTP client ( inspired by famous SuperAgent lib in Node.js )
 
-![GopherGoRequest](https://raw.githubusercontent.com/parnurzeal/gorequest/gh-pages/images/Gopher_GoRequest_400x300.jpg)
+![GopherReq](https://raw.githubusercontent.com/parnurzeal/gorequest/gh-pages/images/Gopher_GoRequest_400x300.jpg)
 
 #### "Shooting Requests like a Machine Gun" - Gopher
 
@@ -25,7 +25,7 @@ Sending request has never been as fun nor easier than this. It comes with lots o
 ## Installation
 
 ```bash
-$ go get github.com/serialt/gorequest
+$ go get github.com/serialt/req
 ```
 
 ## Documentation
@@ -36,27 +36,27 @@ See [Go Doc](http://godoc.org/github.com/parnurzeal/gorequest) or [Go Walker](ht
 [![Drone Build Status](https://drone.io/github.com/jmcvetta/restclient/status.png)](https://drone.io/github.com/parnurzeal/gorequest/latest)
 [![Travis Build Status](https://travis-ci.org/parnurzeal/gorequest.svg?branch=master)](https://travis-ci.org/parnurzeal/gorequest)
 
-## Why should you use GoRequest?
+## Why should you use Req?
 
-GoRequest makes thing much more simple for you, making http client more awesome and fun like SuperAgent + golang style usage.
+Req makes thing much more simple for you, making http client more awesome and fun like SuperAgent + golang style usage.
 
-This is what you normally do for a simple GET without GoRequest:
+This is what you normally do for a simple GET without Req:
 
 ```go
 resp, err := http.Get("http://example.com/")
 ```
 
-With GoRequest:
+With Req:
 
 ```go
-request := gorequest.New()
+request := req.New()
 resp, body, errs := request.Get("http://example.com/").End()
 ```
 
 Or below if you don't want to reuse it for other requests.
 
 ```go
-resp, body, errs := gorequest.New().Get("http://example.com/").End()
+resp, body, errs := req.New().Get("http://example.com/").End()
 ```
 
 How about getting control over HTTP client headers, redirect policy, and etc. Things can quickly get more complicated in golang. You need to create a Client, set headers in a different command, ... just to do only one __GET__
@@ -75,7 +75,7 @@ resp, err := client.Do(req)
 Why make things ugly while you can just do it as follows:
 
 ```go
-request := gorequest.New()
+request := req.New()
 resp, body, errs := request.Get("http://example.com").
   RedirectPolicy(redirectPolicyFunc).
   Set("If-None-Match", `W/"wyzzy"`).
@@ -85,7 +85,7 @@ resp, body, errs := request.Get("http://example.com").
 __DELETE__, __HEAD__, __POST__, __PUT__, __PATCH__ are now supported and can be used in the same way as __GET__:
 
 ```go
-request := gorequest.New()
+request := req.New()
 resp, body, errs := request.Post("http://example.com").End()
 // PUT -> request.Put("http://example.com").End()
 // DELETE -> request.Delete("http://example.com").End()
@@ -106,15 +106,15 @@ mJson, _ := json.Marshal(m)
 contentReader := bytes.NewReader(mJson)
 req, _ := http.NewRequest("POST", "http://example.com", contentReader)
 req.Header.Set("Content-Type", "application/json")
-req.Header.Set("Notes","GoRequest is coming!")
+req.Header.Set("Notes","Req is coming!")
 client := &http.Client{}
 resp, _ := client.Do(req)
 ```
 
-Compared to our GoRequest version, JSON is for sure a default. So, it turns out to be just one simple line!:
+Compared to our Req version, JSON is for sure a default. So, it turns out to be just one simple line!:
 
 ```go
-request := gorequest.New()
+request := req.New()
 resp, body, errs := request.Post("http://example.com").
   Set("Notes","gorequst is coming!").
   Send(`{"name":"backy", "species":"dog"}`).
@@ -129,7 +129,7 @@ type BrowserVersionSupport struct {
   Firefox string
 }
 ver := BrowserVersionSupport{ Chrome: "37.0.2041.6", Firefox: "30.0" }
-request := gorequest.New()
+request := req.New()
 resp, body, errs := request.Post("http://version.com/update").
   Send(ver).
   Send(`{"Safari":"5.1.10"}`).
@@ -140,14 +140,14 @@ Not only for Send() but Query() is also supported. Just give it a try! :)
 
 ## Callback
 
-Moreover, GoRequest also supports callback function. This gives you much more flexibility on using it. You can use it any way to match your own style!
+Moreover, Req also supports callback function. This gives you much more flexibility on using it. You can use it any way to match your own style!
 Let's see a bit of callback example:
 
 ```go
-func printStatus(resp gorequest.Response, body string, errs []error){
+func printStatus(resp req.Response, body string, errs []error){
   fmt.Println(resp.Status)
 }
-gorequest.New().Get("http://example.com").End(printStatus)
+req.New().Get("http://example.com").End(printStatus)
 ```
 
 ## Multipart/Form-Data
@@ -155,7 +155,7 @@ gorequest.New().Get("http://example.com").End(printStatus)
 You can specify the content-type of the request to type `multipart` to send all data as `multipart/form-data`. This feature also allows you to send (multiple) files! Check the examples below!
 
 ```go
-gorequest.New().Post("http://example.com/").
+req.New().Post("http://example.com/").
   Type("multipart").
   Send(`{"query1":"test"}`).
   End()
@@ -167,7 +167,7 @@ The `SendFile` function accepts `strings` as path to a file, `[]byte` slice or e
           f, _ := filepath.Abs("./file2.txt")
 bytesOfFile, _ := ioutil.ReadFile(f)
 
-gorequest.New().Post("http://example.com/").
+req.New().Post("http://example.com/").
   Type("multipart").
   SendFile("./file1.txt").
   SendFile(bytesOfFile, "file2.txt", "my_file_fieldname").
@@ -178,10 +178,10 @@ Check the docs for `SendFile` to get more information about the types of argumen
 
 ## Proxy
 
-In the case when you are behind proxy, GoRequest can handle it easily with Proxy func:
+In the case when you are behind proxy, Req can handle it easily with Proxy func:
 
 ```go
-request := gorequest.New().Proxy("http://proxy:999")
+request := req.New().Proxy("http://proxy:999")
 resp, body, errs := request.Get("http://example-proxy.com").End()
 // To reuse same client with no_proxy, use empty string:
 resp, body, errs = request.Proxy("").Get("http://example-no-proxy.com").End()
@@ -192,7 +192,7 @@ resp, body, errs = request.Proxy("").Get("http://example-no-proxy.com").End()
 To add a basic authentication header:
 
 ```go
-request := gorequest.New().SetBasicAuth("username", "password")
+request := req.New().SetBasicAuth("username", "password")
 resp, body, errs := request.Get("http://example-proxy.com").End()
 ```
 
@@ -201,7 +201,7 @@ resp, body, errs := request.Get("http://example-proxy.com").End()
 Timeout can be set in any time duration using time package:
 
 ```go
-request := gorequest.New().Timeout(2*time.Millisecond)
+request := req.New().Timeout(2*time.Millisecond)
 resp, body, errs:= request.Get("http://example.com").End()
 ```
 
@@ -214,7 +214,7 @@ Thanks to @jaytaylor, we now have EndBytes to use when you want the body as byte
 The callbacks work the same way as with `End`, except that a byte array is used instead of a string.
 
 ```go
-resp, bodyBytes, errs := gorequest.New().Get("http://example.com/").EndBytes()
+resp, bodyBytes, errs := req.New().Get("http://example.com/").EndBytes()
 ```
 
 ## EndStruct
@@ -232,7 +232,7 @@ heyYou struct {
 
 var heyYou heyYou
 
-resp, _, errs := gorequest.New().Get("http://example.com/").EndStruct(&heyYou)
+resp, _, errs := req.New().Get("http://example.com/").EndStruct(&heyYou)
 ```
 
 ## Retry
@@ -240,7 +240,7 @@ resp, _, errs := gorequest.New().Get("http://example.com/").EndStruct(&heyYou)
 Supposing you need retry 3 times, with 5 seconds between each attempt when gets a BadRequest or a InternalServerError
 
 ```go
-request := gorequest.New()
+request := req.New()
 resp, body, errs := request.Get("http://example.com/").
                     Retry(3, 5 * time.Second, http.StatusBadRequest, http.StatusInternalServerError).
                     End()
@@ -258,7 +258,7 @@ made.
 For example to redirect only to https endpoints:
 
 ```go
-request := gorequest.New()
+request := req.New()
 resp, body, errs := request.Get("http://example.com/").
                     RedirectPolicy(func(req Request, via []*Request) error {
                       if req.URL.Scheme != "https" {
@@ -276,7 +276,7 @@ You can reuse settings of a Request by cloning it _before_ making any requests. 
 Clones will copy the same settings (headers, query, etc..), but will only shallow copy any "Data" given to it. They will also share the same Transport and http.Client.
 
 ```go
-baseRequest := gorequest.New()
+baseRequest := req.New()
 // apply anything you want to these settings. Eg:
 baseRequest.Timeout(10 * time.Millisecond).
   BasicAuth("user", "password")
@@ -287,16 +287,16 @@ resp, body, errs := baseRequest.Clone().Get("http://exmaple.com/").End()
 
 ## Debug
 
-For debugging, GoRequest leverages `httputil` to dump details of every request/response. (Thanks to @dafang)
+For debugging, Req leverages `httputil` to dump details of every request/response. (Thanks to @dafang)
 
-You can just use `SetDebug` or environment variable `GOREQUEST_DEBUG=0|1` to enable/disable debug mode and `SetLogger` to set your own choice of logger.
+You can just use `SetDebug` or environment variable `REQ_DEBUG=0|1` to enable/disable debug mode and `SetLogger` to set your own choice of logger.
 
-Thanks to @QuentinPerez, we can see even how gorequest is compared to CURL by using `SetCurlCommand`.
+Thanks to @QuentinPerez, we can see even how req is compared to CURL by using `SetCurlCommand`.
 
 ## Noted
-As the underlying gorequest is based on http.Client in most use cases, gorequest.New() should be called once and reuse gorequest as much as possible.
+As the underlying req is based on http.Client in most use cases, req.New() should be called once and reuse req as much as possible.
 
-## Contributing to GoRequest:
+## Contributing to Req:
 
 If you find any improvement or issue you want to fix, feel free to send me a pull request with testing.
 
